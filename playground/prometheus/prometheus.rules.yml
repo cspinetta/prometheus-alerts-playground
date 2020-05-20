@@ -1,0 +1,18 @@
+groups:
+- name: example
+  rules:
+  - alert: LowAppendedSamples
+    expr: rate(prometheus_tsdb_head_samples_appended_total{job="prometheus"}[1m]) < 110
+    for: 5m
+    labels:
+      severity: page
+    annotations:
+        summary: High scrape latency
+  - alert: HighScrapeLatency
+    expr: scrape_duration_seconds{job="prometheus"} > 0.001
+    for: 1m
+    labels:
+      severity: page
+    annotations:
+      summary: High scrape latency
+

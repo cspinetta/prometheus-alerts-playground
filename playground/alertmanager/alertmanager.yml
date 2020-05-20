@@ -1,0 +1,15 @@
+global:
+  # The smarthost and SMTP sender used for mail notifications.
+  resolve_timeout: 1m
+  smtp_require_tls: false
+
+route:
+  receiver: 'mail-notifications'
+
+receivers:
+  - name: 'mail-notifications'
+    email_configs:
+      - to: root@localhost
+        from: monitoring.testing@localhost
+        smarthost: smtp:25
+        send_resolved: true
